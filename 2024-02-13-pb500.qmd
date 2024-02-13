@@ -42,7 +42,7 @@ format:
 ## 💡 Pro-tip
 
 - Don't stick with **base R**. 
-- Instead, learn to use the `tidyverse` suite of packages. 
+- Rather, learn to use the `tidyverse` suite of packages. 
 
 (more on this later)
 
