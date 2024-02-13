@@ -1,0 +1,924 @@
+---
+title: "<span style='display:inline-block;font-size:4.75rem;line-height:1.1em !important;margin-bottom:0.5em;'>The essential data science toolkit to give your PhD a boost</span>"
+subtitle: "🧰 In the toolbox: coding, tidyverse, Git, Markdown & Quarto <sup style='font-size:0.35em'>⭐️</sup>"
+author: "Dr [Jon Cardoso-Silva](https://jonjoncardoso.github.io)"
+institute: '![](figures/LSE Data Science Institute.png){width=10em}'
+date: 13 Feb 2024
+date-meta: 13 February 2024
+date-format: "DD MMM YYYY"
+toc: true
+toc-depth: 1
+toc-title: "<span style='font-size:0.8em'>Suggested toolkit:</span>"
+center-title-slide: false
+from: markdown+emoji
+
+editor:
+  render-on-save: true
+  preview: true
+format:
+ revealjs:
+    link-external-newwindow: true
+    link-external-icon: true
+    self-contained: true 
+    fig-responsive: true
+    theme: [white]
+    slide-number: true
+    mouse-wheel: false
+    preview-links: auto
+    css: styles_slides.css
+    logo: figures/LSE Data Science Institute.png
+    footer: 'PB500 | Data Science Essentials'
+---
+
+# Programming 
+
+- You can get much further in your PhD if you learn to program
+- R is widely adopted in the social sciences and is great!
+
+::: {.fragment}
+
+::: {.callout-important}
+
+## 💡 Pro-tip
+
+- Don't stick with **base R**. 
+- Instead, learn to use the `tidyverse` suite of packages. 
+
+(more on this later)
+
+:::
+
+:::
+
+## Python vs R {.smaller}
+
+::: columns
+
+::: {.column style="width:47.5%;margin-right:2.5%;font-size:0.9em" .r-stretch}
+
+<figure style="display:inline-block;padding:1em;align:middle;text-align:center;">
+    <img src="./figures/python-logo-notext.svg" alt="Logo of the programming language python" role="presentation" style="object-fit: cover;width:5em;height:5em;object-position: 95% 0;">
+    <figcaption><strong>Python</strong></figcaption>
+</figure>
+
+- Python is a general-purpose programming language
+- It is used for web development, scientific computing, data science, advanced machine learning tools (deep learning), etc.
+
+:::
+
+::: {.column style="width:47.5%;margin-left:2.5%;font-size:0.9em" .r-stretch}
+
+<figure style="display:inline-block;padding:1em;margin-right:1em;align:middle;text-align:center;">
+    <img src="./figures/R_logo.svg" alt="Logo of the programming language R"  role="presentation" style="object-fit: fill;width:5em;height:5em;object-position: 0% -5;">
+    <figcaption><strong>R</strong></figcaption>
+</figure>
+
+- R is more niche. It is a programming language created for statistical computing
+- You can do many other things with R, but it is mostly used for statistics and general data science (_except for heavy Machine Learning_)
+
+:::
+
+:::
+
+## R for Python users {.smaller}
+
+**Data types**
+
+::: {.columns}
+
+::: {.column width="50%"}
+
+![](./figures/R_logo.svg){style="width:2em;"}
+
+::: {.fragment fragment-index=1}
+
+- In R, you <mark>assign</mark> a variable using the operator `<-` :
+
+``` {.r code-line-numbers="false" style="width:30%;margin-left:1em"}
+var <- 2
+```
+
+:::
+
+::: {.fragment fragment-index=2}
+
+- Some basic data types:
+
+``` {.r code-line-numbers="false" style="width:95%;margin-left:1em"}
+var <- "value" # A string. Single quotes are OK too
+
+var <- 2.2     # A double (aka numeric)
+var <- 2       # Also a double! 😱
+
+# Want an integer? You have to be explicit:
+var <- as.integer(2)
+
+```
+
+:::
+
+:::
+
+::: {.column width="50%"}
+
+![](./figures/python-logo-notext.svg){style="width:1.35em;"}
+
+::: {.fragment fragment-index=1}
+
+- Whereas in Python, assignments are done with `=` :
+
+``` {.python code-line-numbers="false" style="width:30%;margin-left:1em"}
+var = 2
+```
+
+:::
+
+::: {.fragment fragment-index=2}
+
+- The python equivalent:
+
+``` {.r code-line-numbers="false" style="width:95%;margin-left:1em"}
+var = "value" # A string. Single quotes are OK too
+
+var = 2.2     # A float
+var = 2       # An int (🏅)
+
+```
+
+:::
+
+:::
+
+:::
+
+## R for Python users {.smaller}
+
+**R Vectors**
+
+![](./figures/R_logo.svg){style="display:block;width:2em;height:2em;"}
+
+- R is a **vectorized** language. Everything is a vector!
+- Amongst other things, this means we can call `length()` on any variable:
+
+::: {.columns}
+
+::: {.column .fragment style="width:50%;font-size:0.8em;"}
+
+In the example below, `var` is a vector of length 1.
+
+``` {.r code-line-numbers="false" style="width:70%;"}
+# This is a vector!
+var <- 2.2
+
+length(var)
+```
+
+returns:
+
+```{.text code-line-numbers="false" style="width:70%;margin-left:1em"}
+[1] 1
+```
+
+:::
+
+::: {.column .fragment style="width:50%;font-size:0.8em;"}
+
+Use the `c( )` function to **concatenate** vectors:
+
+
+``` {.r code-line-numbers="false" style="width:70%;"}
+# A vector of length 3
+var <- c(2.2, 3.3, 4.4)
+
+length(var)
+```
+
+returns:
+
+```{.text code-line-numbers="false" style="width:70%;margin-left:1em"}
+[1] 3
+```
+
+:::
+
+:::
+
+::: {.aside}
+
+::: {.fragment}
+
+The `[1] ` you see printed out in the console means that even the output of `length( )` is a vector, and you are seeing its first element.
+
+:::
+
+:::
+
+
+## R for Python users {.smaller}
+
+**R Vectors (cont.)**
+
+![](./figures/R_logo.svg){style="display:block;width:2em;height:2em;"}
+
+- ⚠️ R vectors can only have one data type!
+
+::: {style="margin-top:0.5em;"}
+
+:::
+
+::: {.columns}
+
+::: {.column .fragment style="width:50%;font-size:0.8em;"}
+
+This is straightforward:
+
+``` {.r code-line-numbers="false" style="width:70%;"}
+# A vector of numbers
+c(1, 2, 3, 4, 5)
+
+# A vector of characters
+c("a", "b", "c", "d", "e")
+
+# A vector of booleans
+c(TRUE, FALSE, TRUE, FALSE, TRUE)
+
+```
+
+:::
+
+::: {.column .fragment style="width:50%;font-size:0.8em;"}
+
+But beware! The code below is also valid:
+
+``` {.r code-line-numbers="false" style="width:70%;"}
+my_vec <- c(2, "3", as.integer(4))
+```
+
+::: {.fragment}
+
+It won't throw an error, but once you inspect the type of the vector, you will see that `typeof(my_vec)` is a `"character"`.
+
+
+If you type:
+
+``` {.r code-line-numbers="false" style="width:70%;"}
+my_vec
+```
+
+You will see:
+
+``` {.text code-line-numbers="false" style="width:70%;"}
+[1] "2" "3" "4"
+```
+
+:::
+
+:::
+
+:::
+
+## R for Python users {.smaller}
+
+**Lists (not the same as vectors)**
+
+![](./figures/R_logo.svg){style="display:block;width:2em;height:2em;"}
+
+- If you need to keep elements of different data types, create a <mark>list</mark> instead.
+
+::: {.columns}
+
+::: {.column width="50%"}
+
+``` {.r code-line-numbers="false" style="width:80%;margin-left:1em"}
+my_list <- list(2, "3", as.integer(4))
+```
+
+::: {.fragment style="margin-left:1em"}
+Now, if you type:
+
+``` {.r code-line-numbers="false" style="width:70%;"}
+my_list
+```
+
+You will see:
+
+``` {.text code-line-numbers="false" style="width:70%;"}
+[[1]]
+[1] 2
+
+[[2]]
+[1] "3"
+
+[[3]]
+[1] 4
+```
+
+:::
+
+:::
+
+::: {.column width="50%"}
+
+::: {.incremental style="margin-top:1.15em"}
+
+- We see a list with a length of 3
+- Each element of the list is shown after the double brackets, `[[ ]]`
+- The first element of the list (`[[1]]`) is a vector of size 1 (`[1]`) that contains the number `2`, etc.
+
+:::
+
+:::
+
+:::
+
+## R for Python users {.smaller}
+
+**Lists are more flexible than vectors (they are also slower to process)**
+
+![](./figures/R_logo.svg){style="display:block;width:2em;height:2em;"}
+
+::: {.columns}
+
+::: {.column width="50%"}
+
+::: {.fragment fragment-index=1}
+
+Vectors are always flat:
+
+``` {.r code-line-numbers="false" style="width:80%"}
+# Me trying to do something complicated
+my_silly_vector <- c(1, c(2, c(3, 4)), 5)
+my_silly_vector
+```
+
+:::
+
+::: {.fragment fragment-index=2}
+
+yields a simple vector:
+
+``` {.text code-line-numbers="false" style="width:70%;"}
+[1] 1 2 3 4 5
+```
+
+:::
+
+:::
+
+::: {.column  width="50%"}
+
+::: {.fragment fragment-index=3}
+
+Lists preserve the structure:
+
+``` {.r code-line-numbers="false" style="width:100%"}
+# Let's try converting some vectors into a list
+my_silly_list <- list(1, list(2, c(3, 4)), 5)
+my_silly_list
+```
+
+:::
+
+::: {.fragment fragment-index=4}
+
+This produces a list of length 3 (not 5) with a more complex, nested structure:
+
+``` {.text code-line-numbers="false" style="width:70%;font-size:0.6em"}
+[[1]]
+[1] 1
+
+[[2]]
+[[2]][[1]]
+[1] 2
+
+[[2]][[2]]
+[1] 3 4
+
+
+[[3]]
+[1] 5
+```
+
+:::
+
+:::
+
+:::
+
+::: footer
+
+:::
+
+## R for Python users {.smaller}
+
+**Obs: Python does not have vectors, only lists**
+
+![](./figures/python-logo-notext.svg){style="display:block;width:2em;height:2em;"}
+
+- If you run:
+
+``` {.python code-line-numbers="false" style="width:30%;margin-left:1em"}
+elements = [2, "3", 4]
+```
+
+- You will get a list of length 3, with elements of different data types:
+
+::: {.columns}
+
+::: {.column width="34%"}
+
+
+``` {.python code-line-numbers="false" style="width:70%;margin-left:1em"}
+type(elements)
+```
+
+``` {.text code-line-numbers="false" style="width:70%;margin-left:1em;margin-top:0.5em;"}
+list
+```
+
+:::
+
+::: {.column width="33%"}
+
+``` {.python code-line-numbers="false" style="width:70%"}
+len(elements)
+```
+
+``` {.text code-line-numbers="false" style="width:70%margin-top:0.5em;"}
+3
+```
+:::
+
+::: {.column width="33%"}
+
+``` {.python code-line-numbers="false" style="width:70%;"}
+elements
+```
+
+``` {.text code-line-numbers="false" style="width:70%;margin-top:0.5em;"}
+[2, '3', 4]
+```
+
+(preserved structure)
+
+:::
+
+:::
+
+::: aside
+
+- The closest equivalent of a vector in Python is an array from the `numpy` package (you have to install it separately)
+
+:::
+
+## R for Python users {.smaller}
+
+**Loops are not that different**
+
+::: {.columns}
+
+::: {.column width="50%"}
+
+![](./figures/R_logo.svg){style="width:2em;"}
+
+``` {.r code-line-numbers="false" style="width:70%;"}
+for (i in 1:10) {
+  print(i)
+}
+```
+
+``` {.r code-line-numbers="false" style="width:70%;margin-top:1em"}
+while (i < 10) {
+  print(i)
+  i <- i + 1
+}
+```
+
+(R needs the curly brackets)
+
+:::
+
+::: {.column width="50%"}
+
+![](./figures/python-logo-notext.svg){style="width:1.35em;"}
+
+``` {.python code-line-numbers="false" style="width:70%;"}
+for i in range(1, 11):
+    print(i)
+  
+```
+
+``` {.python code-line-numbers="false" style="width:70%;margin-top:1em"}
+while i < 10:
+    print(i)
+    i += 1
+
+
+```
+
+(Python needs the indentation)
+
+:::
+
+:::
+
+## R for Python users {.smaller}
+
+**Custom functions definition, compared**
+
+::: {.columns}
+
+::: {.column width="50%"}
+
+![](./figures/R_logo.svg){style="width:2em;"}
+
+``` {.r code-line-numbers="false" style="width:70%;"}
+my_function <- function(x) {
+  return(x + 1)
+}
+```
+
+``` {.r code-line-numbers="false" style="width:70%;margin-top:1em"}
+my_function(2)
+```
+
+::: {.fragment style="margin-top:1em;width:70%"}
+
+In R, the `return` keyword exists, but it is optional. Whatever is at the last line of the function will be returned.
+
+``` {.r code-line-numbers="false" style="margin-top:1em"}
+my_function <- function(x) {
+  x + 1
+}
+```
+
+:::
+
+:::
+
+::: {.column width="50%"}
+
+![](./figures/python-logo-notext.svg){style="width:1.35em;"}
+
+``` {.python code-line-numbers="false" style="width:70%;"}
+def my_function(x):
+    return x + 1
+
+
+```
+
+``` {.python code-line-numbers="false" style="width:70%;margin-top:1em"}
+my_function(2)
+```
+
+:::
+
+:::
+
+## Base R vs tidyverse {.smaller}
+
+::: {.columns}
+
+::: {.column .fragment width="37%;margin-right:3%"}
+
+![](./figures/R_logo.svg){style="width:15%;"}
+
+- R has a base set of functions that come with the installation of the language
+
+- The base functions are [OK]{style="font-size:1.2em;"} - they are just not awesome.
+
+
+:::
+
+::: {.column .fragment width="60%"}
+
+![](./figures/tidyverse-logo.png){style="width:6.5%;"}
+
+- The `tidyverse` is not part of the base R installation, but it is a very popular package
+
+- It is actually a **collection of several packages** that make it easier to manipulate data (+ databases + plotting + modelling + etc.)
+
+- The `tidyverse` is a **modern** and **intuitive** way of doing data science in R. It's closer to SQL and pandas (in Python)
+
+::: {.callout-note}
+
+## Note to Python users
+
+If you are a Python user, think of the `tidyverse` as what `pandas` is to Python
+
+:::
+
+:::
+
+:::
+
+## Base R vs tidyverse {.smaller}
+
+**Example: reading a csv file**
+
+::: {.columns}
+
+::: {.column width="50%"}
+
+![](./figures/R_logo.svg){style="width:2em;"}
+
+``` {.r code-line-numbers="false" style="width:70%;"}
+# Base R
+my_data <- read.csv("my_file.csv")
+```
+
+:::
+
+::: {.column width="50%"}
+
+![](./figures/tidyverse-logo.png){style="width:6.5%;"}
+
+``` {.r code-line-numbers="false" style="width:70%;"}
+# tidyverse
+my_data <- read_csv("my_file.csv")
+```
+
+:::
+
+:::
+
+## Base R vs tidyverse {.smaller}
+
+**Example: selecting columns**
+
+::: {.columns}
+
+::: {.column width="50%"}
+
+![](./figures/R_logo.svg){style="width:2em;"}
+
+``` {.r code-line-numbers="false" style="width:80%;"}
+# Base R
+my_data <- my_data[, c("col1", "col2")]
+```
+
+:::
+
+::: {.column width="50%"}
+
+![](./figures/tidyverse-logo.png){style="width:6.5%;"}
+
+``` {.r code-line-numbers="false" style="width:80%;"}
+# tidyverse
+my_data <- select(my_data, col1, col2)
+```
+
+:::
+
+:::
+
+## Base R vs tidyverse {.smaller}
+
+**The pipe operator**
+
+- If there is one thing that beginners tend to find counterintuitive about tidyverse, it is the pipe operator `%>%`. But it is quite simple:
+
+``` {.r code-line-numbers="false" style="width:70%;margin-left:1em"}
+my_data <- read_csv("my_file.csv") %>% select(col1, col2)
+```
+
+::: {.fragment}
+
+- This is equivalent to the common, nested way of writing:
+
+``` {.r code-line-numbers="false" style="width:70%;margin-left:1em"}
+my_data <- select(read_csv("my_file.csv"), col1, col2)
+```
+
+:::
+
+::: {.incremental}
+
+- The pipe operator takes the output of the function on the left and passes it as the first argument of the function on the right.
+- When you see `%>%`, think of it as the word "then".
+:::
+
+## Base R vs tidyverse {.smaller}
+
+**The pipe operator**
+
+- This <mark>method chaining</mark> operator became so popular that even base R has a pipe operator now (`|>`)
+  - In fact, you can interchangeably use `%>%` and `|>`:
+
+``` {.r code-line-numbers="false" style="width:70%;margin-left:2em"}
+# This also works
+my_data <- read_csv("my_file.csv") |> select(col1, col2)
+```
+
+- pandas (in Python) also supports method chaining:
+
+::: {.columns .fragment}
+
+::: {.column width="50%"}
+
+**Without method chaining**
+
+```{.python code-line-numbers="false" style="width:70%;"}
+df = pd.read_csv('data.csv')
+df = df.fillna(...)
+df = df.query('some_condition')
+df['new_column'] = df.cut(...)
+df = df.pivot_table(...)
+df = df.rename(...)
+```
+
+:::
+
+::: {.column width="50%"}
+
+**With method chaining**
+
+```{.python code-line-numbers="false" style="width:70%;"}
+df = (
+    pd.read_csv('data.csv')
+    .fillna(...)
+    .query('some_condition')
+    .assign(new_column=df.cut(...))
+    .pivot_table(...)
+    .rename(...)
+)
+```
+
+:::
+
+:::
+
+
+## Base R vs tidyverse {.smaller}
+
+**Example: filtering rows**
+
+::: {.columns}
+
+::: {.column width="50%"}
+
+![](./figures/R_logo.svg){style="width:2em;"}
+
+``` {.r code-line-numbers="false" style="width:80%;"}
+# Base R
+my_data <- my_data[my_data$col1 == 1, ]
+```
+
+:::
+
+::: {.column width="50%"}
+
+![](./figures/tidyverse-logo.png){style="width:6.5%;"}
+
+``` {.r code-line-numbers="false" style="width:80%;"}
+# tidyverse
+my_data <- my_data %>% filter(col1 == 1)
+```
+
+:::
+
+:::
+
+**Example: combing columns together**
+
+::: {.columns}
+
+::: {.column width="50%"}
+
+![](./figures/R_logo.svg){style="width:2em;"}
+
+``` {.r code-line-numbers="false" style="width:90%;"}
+# Base R
+my_data$col3 <- my_data$col1 + my_data$col2
+```
+
+:::
+
+::: {.column width="50%"}
+
+![](./figures/tidyverse-logo.png){style="width:6.5%;"}
+
+``` {.r code-line-numbers="false" style="width:90%;"}
+# tidyverse
+my_data <- my_data %>% mutate(col3 = col1 + col2)
+```
+
+:::
+
+:::
+
+## Base R vs tidyverse {.smaller}
+
+**Example: grouping and summarizing**
+
+Say we have a random dataset:
+
+``` {.r code-line-numbers="false" style="width:90%;"}
+# Generate a random my_data
+my_data <- data.frame(col1 = sample(1:3, 100, replace = TRUE), col2 = rnorm(100))
+```
+
+If we want to calculate the mean of `col2` for each value of `col1`:
+
+
+![](./figures/R_logo.svg){style="display:block;width:2em;height:2em;"}
+
+``` {.r code-line-numbers="false" style="width:70%;"}
+# The Base R way
+my_data <- aggregate(my_data, by = list(my_data$col1), FUN = mean)
+```
+
+![](./figures/tidyverse-logo.png){style="display:block;width:2em;"}
+
+``` {.r code-line-numbers="false" style="width:70%;"}
+# Overtime, you will see that the tidyverse way becomes more intuitive
+my_data <- my_data %>% group_by(col1) %>% summarize(mean(col2))
+```
+
+# Git/GitHub
+
+- Git is a version control system
+- If you use it, you can:
+  - Keep track of changes in your code + documents
+  - Collaborate with others
+  - Share your code with the world
+  - Publish your code as a package
+  - Publish your code as a website
+
+## Git/GitHub {.smaller}
+
+- GitHub is a platform that hosts your Git repositories
+- For a productivity boost, I recommend:
+    - Ditch MS Word/G Docs and write your documents in Markdown
+    - Don't store your code in your computer or Google Drive. Use Git/GitHub instead
+    - Use Git to keep track of changes in your documents
+
+👉 [Live Demo]{style="margin-left:0.5em;"}
+
+::: aside
+
+Useful links:
+
+- [GitHub | Start your journey](https://docs.github.com/en/get-started/start-your-journey)
+
+:::
+
+# Markdown language
+
+- Markdown is a language that allows you to write simple text documents with some formatting
+- It is powerful and easy to learn
+   - You can mix code with formatted text
+   - Write equations
+   - Create tables, lists, etc.
+   - Create web pages
+
+::: aside
+
+This presentation is written in Markdown
+
+:::
+
+## Markdown language {.smaller}
+
+👉 [Live Demo]{style="margin-left:0.5em;"}
+
+::: aside
+
+Useful links:
+
+- [GitHub Markdown Guide](https://guides.github.com/features/mastering-markdown/)
+
+:::
+
+# Quarto
+
+::: {style="font-size:0.85em;"}
+
+- The most powerful way to write documents in Markdown
+- It allows you to write:
+    - Websites
+    - Presentations (like this one)
+    - Academic papers
+    - **Books**
+    - Dashboards (with R or Python code)
+
+:::
+
+::: aside
+
+Useful links:
+
+- [Quarto Guides](https://quarto.org/docs/guide/)
+
+:::
+
+# Next steps
+
+- Follow the [Quarto Get Started Tutorial](https://quarto.org/docs/get-started/)
+    - [Installation](https://quarto.org/docs/get-started/)
+    - [Tutorial: 'Hello, Quarto'](https://quarto.org/docs/get-started/hello/rstudio.html)
+    - [Tutorial: 'Computations' (in R)](https://quarto.org/docs/get-started/computations/rstudio.html)
+    - [Tutorial: Reporting](https://quarto.org/docs/get-started/authoring/rstudio.html)
+- Suggested Practice:
+    - **Convert one of your papers fully into a Quarto document**
+- See the source code of this presentation [on my GitHub](https://github.com/jonjoncardoso/lse-pb500-talk)
